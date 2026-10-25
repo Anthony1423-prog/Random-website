@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vibeify | Mood-Dependent Music Suggestions</title>
     <link rel="stylesheet" href="style.css">
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
     <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    >
 </head>
 
 <body>
-
     <!-- Animated Background Orbs -->
     <div class="bg-orb orb-1"></div>
     <div class="bg-orb orb-2"></div>
@@ -27,46 +32,71 @@
                 <i class="fa-solid fa-headphones-simple"></i>
                 <span>Vibeify</span>
             </div>
-            <p class="tagline">How are you feeling right now? Select your mood to match your soundtrack.</p>
+
+            <p class="tagline">
+                How are you feeling right now? Select your mood to match your soundtrack.
+            </p>
 
             <!-- Global Search Bar -->
             <div class="search-container">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="searchInput" placeholder="Search any song or artist across vibes...">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search any song or artist across vibes..."
+                >
             </div>
         </header>
 
         <!-- Mood Selector Section -->
         <section class="mood-section">
             <h2>Select Your Mood</h2>
+
             <div class="mood-grid">
                 <div class="mood-card" data-mood="happy">
-                    <div class="icon-box"><i class="fa-solid fa-face-smile"></i></div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-face-smile"></i>
+                    </div>
                     <h3>Happy</h3>
                     <p>Upbeat & energetic tunes</p>
                 </div>
+
                 <div class="mood-card" data-mood="sad">
-                    <div class="icon-box"><i class="fa-solid fa-face-sad-tear"></i></div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-face-sad-tear"></i>
+                    </div>
                     <h3>Melancholy</h3>
                     <p>Deep & soulful melodies</p>
                 </div>
+
                 <div class="mood-card" data-mood="energetic">
-                    <div class="icon-box"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
                     <h3>Energetic</h3>
                     <p>Pump-up beats & workout</p>
                 </div>
+
                 <div class="mood-card" data-mood="chill">
-                    <div class="icon-box"><i class="fa-solid fa-mug-hot"></i></div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
                     <h3>Chill & Relax</h3>
                     <p>Lofi, ambient & peaceful</p>
                 </div>
+
                 <div class="mood-card" data-mood="romantic">
-                    <div class="icon-box"><i class="fa-solid fa-heart"></i></div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
                     <h3>Romantic</h3>
                     <p>Sweet & dreamy vibes</p>
                 </div>
+
                 <div class="mood-card" data-mood="focused">
-                    <div class="icon-box"><i class="fa-solid fa-brain"></i></div>
+                    <div class="icon-box">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
                     <h3>Focused</h3>
                     <p>Instrumental & study flow</p>
                 </div>
@@ -78,194 +108,493 @@
             <div class="rec-header">
                 <div>
                     <h2 id="playlistTitle">Your Vibe Playlist</h2>
-                    <p id="playlistSubtitle" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 2px;">
-                        Click any song to watch/listen instantly on YouTube</p>
+                    <p
+                        style="
+                            color: var(--text-muted);
+                            font-size: 0.85rem;
+                            margin-top: 2px;
+                        "
+                    >
+                        Click a song to search for it on YouTube.
+                    </p>
                 </div>
-                <span id="moodBadge" class="badge">Chill</span>
+
+                <span id="moodBadge" class="badge">Choose a mood</span>
             </div>
+
             <div class="song-list" id="songList">
-                <!-- Dynamically populated via JavaScript -->
+                <!-- Songs are added here with JavaScript. -->
             </div>
+
+            <p style="margin-top: 16px; font-size: 0.8rem; color: var(--text-muted);">
+                Music data powered by
+                <a href="https://www.last.fm/" target="_blank" rel="noopener">
+                    AudioScrobbler
+                </a>
+            </p>
         </section>
 
         <!-- Notification Toast -->
         <div class="toast" id="toast">Song added to favorites!</div>
 
-        <!-- Music Status Bar (YouTube Link Feedback) -->
+        <!-- Music Status Bar -->
         <div class="player-bar" id="playerBar">
             <div class="now-playing">
-                <img id="playerImg"
+                <img
+                    id="playerImg"
                     src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=100&auto=format&fit=crop&q=80"
-                    alt="Album Art">
+                    alt="Album art"
+                >
+
                 <div class="track-info">
                     <h4 id="playerTitle">Click a song to open YouTube</h4>
-                    <p id="playerArtist">Redirects instantly</p>
+                    <p id="playerArtist">Searches instantly</p>
                 </div>
             </div>
+
             <div class="player-controls">
                 <div class="yt-hint">
-                    <i class="fa-brands fa-youtube" style="color: #ef4444; font-size: 1.5rem;"></i>
-                    <span>Opens on YouTube in new tab</span>
+                    <i
+                        class="fa-brands fa-youtube"
+                        style="color: #ef4444; font-size: 1.5rem;"
+                    ></i>
+                    <span>Opens on YouTube in a new tab</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- JavaScript Functionality -->
     <script>
         const musicData = {
             happy: [
-                { title: "Badtameez Dil", artist: "Benny Dayal", duration: "4:12", cover: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=150&auto=format&fit=crop&q=80" },
-                { title: "Gallan Goodiyaan", artist: "Yashita Sharma, Manish Kumar Tipu", duration: "4:41", cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150&auto=format&fit=crop&q=80" },
-                { title: "Walking on Sunshine", artist: "Katrina & The Waves", duration: "3:58", cover: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=150&auto=format&fit=crop&q=80" }
+                {
+                    title: "Badtameez Dil",
+                    artist: "Benny Dayal",
+                    duration: "4:12",
+                    cover: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=150&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Gallan Goodiyaan",
+                    artist: "Yashita Sharma, Manish Kumar Tipu",
+                    duration: "4:41",
+                    cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=150&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Walking on Sunshine",
+                    artist: "Katrina & The Waves",
+                    duration: "3:58",
+                    cover: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=150&auto=format&fit=crop&q=80"
+                }
             ],
+
             sad: [
-                { title: "Channa Mereya", artist: "Arijit Singh", duration: "4:49", cover: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150&auto=format&fit=crop&q=80" },
-                { title: "Tujhe Bhula Diya", artist: "Mohit Chauhan, Shekhar Ravjiani", duration: "4:41", cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=150&auto=format&fit=crop&q=80" },
-                { title: "Someone Like You", artist: "Adele", duration: "4:45", cover: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=150&auto=format&fit=crop&q=80" }
+                {
+                    title: "Channa Mereya",
+                    artist: "Arijit Singh",
+                    duration: "4:49",
+                    cover: "https://images.unsplash.com/photo-1518609878373-06d740f60d8b?w=150&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Tujhe Bhula Diya",
+                    artist: "Mohit Chauhan, Shekhar Ravjiani",
+                    duration: "4:41",
+                    cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=150&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Someone Like You",
+                    artist: "Adele",
+                    duration: "4:45",
+                    cover: "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=150&auto=format&fit=crop&q=80"
+                }
             ],
+
             energetic: [
-                { title: "Sher Khul Gaye", artist: "Arijit Singh, Benny Dayal", duration: "3:01", cover: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=150&auto=format&fit=crop&q=80" },
-                { title: "Zinda", artist: "Siddharth Mahadevan", duration: "3:32", cover: "https://images.unsplash.com/photo-1526478806334-5fd488fcaabc?w=150&auto=format&fit=crop&q=80" },
-                { title: "Stronger", artist: "Kanye West", duration: "5:12", cover: "https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?w=150&auto=format&fit=crop&q=80" }
+                {
+                    title: "Sher Khul Gaye",
+                    artist: "Arijit Singh, Benny Dayal",
+                    duration: "3:01",
+                    cover: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=150&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Zinda",
+                    artist: "Siddharth Mahadevan",
+                    duration: "3:32",
+                    cover: "https://images.unsplash.com/photo-1526478806334-5fd488fcaabc?w=150&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Stronger",
+                    artist: "Kanye West",
+                    duration: "5:12",
+                    cover: "https://images.unsplash.com/photo-1571266028243-3716f02d2d2e?w=150&auto=format&fit=crop&q=80"
+                }
             ],
+
             chill: [
-                { title: "Kho Gaye Hum Kahan", artist: "Prateek Kuhad, Jasleen Royal", duration: "4:12", cover: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=150&auto=format&fit=crop&q=80" },
-                { title: "Kasoor", artist: "Prateek Kuhad", duration: "3:40", cover: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=150&auto=format&fit=crop&q=80" },
-                { title: "Sunset Lover", artist: "Petit Biscuit", duration: "3:57", cover: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=150&auto=format&fit=crop&q=80" }
+                {
+                    title: "Kho Gaye Hum Kahan",
+                    artist: "Prateek Kuhad, Jasleen Royal",
+                    duration: "4:12",
+                    cover: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=150&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Kasoor",
+                    artist: "Prateek Kuhad",
+                    duration: "3:40",
+                    cover: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=150&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Sunset Lover",
+                    artist: "Petit Biscuit",
+                    duration: "3:57",
+                    cover: "https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=150&auto=format&fit=crop&q=80"
+                }
             ],
+
             romantic: [
-                { title: "Standing By You", artist: "Nish", duration: "2:45", cover: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=150&auto=format&fit=crop&q=80" },
-                { title: "Tum Hi Ho", artist: "Arijit Singh", duration: "4:22", cover: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=150&auto=format&fit=crop&q=80" },
-                { title: "Perfect", artist: "Ed Sheeran", duration: "4:23", cover: "https://images.unsplash.com/photo-1522748955767-12c222956cf5?w=150&auto=format&fit=crop&q=80" }
+                {
+                    title: "Standing By You",
+                    artist: "Nish",
+                    duration: "2:45",
+                    cover: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=150&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Tum Hi Ho",
+                    artist: "Arijit Singh",
+                    duration: "4:22",
+                    cover: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=150&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Perfect",
+                    artist: "Ed Sheeran",
+                    duration: "4:23",
+                    cover: "https://images.unsplash.com/photo-1522748955767-12c222956cf5?w=150&auto=format&fit=crop&q=80"
+                }
             ],
+
             focused: [
-                { title: "Lofi Bollywood Study Beats", artist: "Various Artists", duration: "3:30", cover: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=150&auto=format&fit=crop&q=80" },
-                { title: "Experience", artist: "Ludovico Einaudi", duration: "5:15", cover: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=150&auto=format&fit=crop&q=80" },
-                { title: "Clair de Lune", artist: "Claude Debussy", duration: "5:03", cover: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=150&auto=format&fit=crop&q=80" }
+                {
+                    title: "Lofi Bollywood Study Beats",
+                    artist: "Various Artists",
+                    duration: "3:30",
+                    cover: "https://images.unsplash.com/photo-1507838153414-b4b713384a76?w=150&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Experience",
+                    artist: "Ludovico Einaudi",
+                    duration: "5:15",
+                    cover: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=150&auto=format&fit=crop&q=80"
+                },
+                {
+                    title: "Clair de Lune",
+                    artist: "Claude Debussy",
+                    duration: "5:03",
+                    cover: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=150&auto=format&fit=crop&q=80"
+                }
             ]
         };
 
-        const moodCards = document.querySelectorAll('.mood-card');
-        const songList = document.getElementById('songList');
-        const playlistTitle = document.getElementById('playlistTitle');
-        const moodBadge = document.getElementById('moodBadge');
-        const recommendationSection = document.getElementById('recommendationSection');
-        const playerBar = document.getElementById('playerBar');
-        const playerImg = document.getElementById('playerImg');
-        const playerTitle = document.getElementById('playerTitle');
-        const playerArtist = document.getElementById('playerArtist');
-        const searchInput = document.getElementById('searchInput');
-        const toast = document.getElementById('toast');
+        const moodCards = document.querySelectorAll(".mood-card");
+        const songList = document.getElementById("songList");
+        const playlistTitle = document.getElementById("playlistTitle");
+        const moodBadge = document.getElementById("moodBadge");
+        const recommendationSection =
+            document.getElementById("recommendationSection");
+        const playerBar = document.getElementById("playerBar");
+        const playerImg = document.getElementById("playerImg");
+        const playerTitle = document.getElementById("playerTitle");
+        const playerArtist = document.getElementById("playerArtist");
+        const searchInput = document.getElementById("searchInput");
+        const toast = document.getElementById("toast");
+
+        let moodRequestId = 0;
 
         function showToast(message) {
             toast.textContent = message;
-            toast.classList.add('show');
+            toast.classList.add("show");
+
             setTimeout(() => {
-                toast.classList.remove('show');
+                toast.classList.remove("show");
             }, 2500);
         }
 
-        function loadMoodPlaylist(mood) {
-            const songs = musicData[mood];
-            renderSongs(songs, `${mood.charAt(0).toUpperCase() + mood.slice(1)} Vibes Playlist`, mood.toUpperCase());
+        function escapeHTML(value) {
+            return String(value).replace(/[&<>"']/g, (character) => {
+                const replacements = {
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
+                };
+
+                return replacements[character];
+            });
+        }
+
+        async function loadMoodPlaylist(mood) {
+            const requestId = ++moodRequestId;
+
+            const moodNames = {
+                happy: "Happy",
+                sad: "Melancholy",
+                energetic: "Energetic",
+                chill: "Chill & Relax",
+                romantic: "Romantic",
+                focused: "Focused"
+            };
+
+            const moodName = moodNames[mood] || mood;
+
+            playlistTitle.textContent = `${moodName} Song Pick`;
+            moodBadge.textContent = moodName.toUpperCase();
+            songList.innerHTML = `
+                <p style="color: var(--text-muted); text-align: center; padding: 20px;">
+                    Finding a song for your mood...
+                </p>
+            `;
+
+            recommendationSection.style.display = "block";
+            recommendationSection.scrollIntoView({ behavior: "smooth" });
+
+            try {
+                const response = await fetch(
+                    `/api/recommend?mood=${encodeURIComponent(mood)}`
+                );
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || "Could not get a song.");
+                }
+
+                if (!data.tracks || data.tracks.length === 0) {
+                    throw new Error("No songs were found for this mood.");
+                }
+
+                // Ignore an older response if another mood was selected meanwhile.
+                if (requestId !== moodRequestId) {
+                    return;
+                }
+
+                const historyKey = `vibeify-recent-${mood}`;
+                let history = JSON.parse(
+                    localStorage.getItem(historyKey) || "[]"
+                );
+
+                let availableTracks = data.tracks.filter((track) => {
+                    const trackId =
+                        `${track.artist}::${track.title}`.toLowerCase();
+
+                    return !history.includes(trackId);
+                });
+
+                // Start a fresh rotation after all returned songs have been used.
+                if (availableTracks.length === 0) {
+                    history = [];
+                    availableTracks = data.tracks;
+                }
+
+                const song =
+                    availableTracks[
+                        Math.floor(Math.random() * availableTracks.length)
+                    ];
+
+                const songId =
+                    `${song.artist}::${song.title}`.toLowerCase();
+
+                history.push(songId);
+
+                localStorage.setItem(
+                    historyKey,
+                    JSON.stringify(history.slice(-50))
+                );
+
+                renderSongs(
+                    [
+                        {
+                            ...song,
+                            duration: "Last.fm pick"
+                        }
+                    ],
+                    `${moodName} Song Pick`,
+                    moodName.toUpperCase()
+                );
+            } catch (error) {
+                if (requestId !== moodRequestId) {
+                    return;
+                }
+
+                songList.innerHTML = "";
+
+                const message = document.createElement("p");
+                message.style.color = "var(--text-muted)";
+                message.style.textAlign = "center";
+                message.style.padding = "20px";
+                message.textContent = error.message;
+
+                songList.appendChild(message);
+            }
         }
 
         function renderSongs(songs, title, badgeText) {
-            songList.innerHTML = '';
+            songList.innerHTML = "";
             playlistTitle.textContent = title;
             moodBadge.textContent = badgeText;
 
             if (songs.length === 0) {
-                songList.innerHTML = `<p style="color: var(--text-muted); text-align:center; padding: 20px;">No matching tracks found.</p>`;
+                songList.innerHTML = `
+                    <p style="color: var(--text-muted); text-align: center; padding: 20px;">
+                        No matching tracks found.
+                    </p>
+                `;
+
                 recommendationSection.style.display = "block";
                 return;
             }
 
             songs.forEach((song, index) => {
-                const songItem = document.createElement('div');
-                songItem.classList.add('song-item');
+                const songItem = document.createElement("div");
+                songItem.classList.add("song-item");
+
+                const safeTitle = escapeHTML(song.title);
+                const safeArtist = escapeHTML(song.artist);
+                const safeDuration = escapeHTML(song.duration || "");
+                const safeCover = escapeHTML(
+                    song.cover ||
+                    "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=150&auto=format&fit=crop&q=80"
+                );
+
                 songItem.innerHTML = `
                     <div class="song-left">
-                        <span class="song-index">0${index + 1}</span>
-                        <img src="${song.cover}" alt="${song.title}">
+                        <span class="song-index">
+                            ${String(index + 1).padStart(2, "0")}
+                        </span>
+                        <img src="${safeCover}" alt="${safeTitle}">
                         <div class="song-details">
-                            <h4>${song.title} <i class="fa-brands fa-youtube yt-icon"></i></h4>
-                            <p>${song.artist}</p>
+                            <h4>
+                                ${safeTitle}
+                                <i class="fa-brands fa-youtube yt-icon"></i>
+                            </h4>
+                            <p>${safeArtist}</p>
                         </div>
                     </div>
+
                     <div class="song-right">
-                        <button class="fav-btn" title="Save to Favorites"><i class="fa-regular fa-heart"></i></button>
-                        <span class="song-duration">${song.duration}</span>
-                        <button class="play-song-btn"><i class="fa-solid fa-play"></i></button>
+                        <button
+                            class="fav-btn"
+                            type="button"
+                            title="Save to favorites"
+                        >
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <span class="song-duration">${safeDuration}</span>
+                        <button
+                            class="play-song-btn"
+                            type="button"
+                            aria-label="Search song on YouTube"
+                        >
+                            <i class="fa-solid fa-play"></i>
+                        </button>
                     </div>
                 `;
 
-                // Handle click on song item to open YouTube
-                songItem.addEventListener('click', (e) => {
-                    // Prevent favorite button from triggering YouTube redirection
-                    if (e.target.closest('.fav-btn')) return;
+                songItem.addEventListener("click", (event) => {
+                    if (event.target.closest(".fav-btn")) {
+                        return;
+                    }
 
-                    playerImg.src = song.cover;
+                    playerImg.src = song.cover || safeCover;
                     playerTitle.textContent = song.title;
                     playerArtist.textContent = song.artist;
-                    playerBar.classList.add('active');
+                    playerBar.classList.add("active");
 
-                    const query = encodeURIComponent(`${song.title} ${song.artist}`);
-                    window.open(`https://www.youtube.com/results?search_query=${query}`, '_blank');
+                    const query = encodeURIComponent(
+                        `${song.title} ${song.artist}`
+                    );
+
+                    window.open(
+                        `https://www.youtube.com/results?search_query=${query}`,
+                        "_blank",
+                        "noopener"
+                    );
                 });
 
-                // Favorite button toggle
-                const favBtn = songItem.querySelector('.fav-btn');
-                favBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const icon = favBtn.querySelector('i');
-                    icon.classList.toggle('fa-regular');
-                    icon.classList.toggle('fa-solid');
-                    icon.style.color = icon.classList.contains('fa-solid') ? '#ef4444' : 'inherit';
-                    showToast(icon.classList.contains('fa-solid') ? `Added "${song.title}" to favorites!` : `Removed from favorites`);
+                const favoriteButton = songItem.querySelector(".fav-btn");
+
+                favoriteButton.addEventListener("click", (event) => {
+                    event.stopPropagation();
+
+                    const icon = favoriteButton.querySelector("i");
+                    icon.classList.toggle("fa-regular");
+                    icon.classList.toggle("fa-solid");
+
+                    const isFavorite = icon.classList.contains("fa-solid");
+                    icon.style.color = isFavorite ? "#ef4444" : "inherit";
+
+                    showToast(
+                        isFavorite
+                            ? `Added "${song.title}" to favorites!`
+                            : "Removed from favorites."
+                    );
                 });
 
                 songList.appendChild(songItem);
             });
 
             recommendationSection.style.display = "block";
-            recommendationSection.scrollIntoView({ behavior: 'smooth' });
+            recommendationSection.scrollIntoView({ behavior: "smooth" });
         }
 
         // Mood card selection
-        moodCards.forEach(card => {
-            card.addEventListener('click', () => {
-                moodCards.forEach(c => c.classList.remove('active'));
-                card.classList.add('active');
-                searchInput.value = ''; // clear search when picking mood
-                loadMoodPlaylist(card.getAttribute('data-mood'));
+        moodCards.forEach((card) => {
+            card.addEventListener("click", () => {
+                moodCards.forEach((moodCard) => {
+                    moodCard.classList.remove("active");
+                });
+
+                card.classList.add("active");
+                searchInput.value = "";
+
+                loadMoodPlaylist(card.getAttribute("data-mood"));
             });
         });
 
-        // Global Search Functionality
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
+        // Search the songs in the built-in example lists.
+        searchInput.addEventListener("input", (event) => {
+            const query = event.target.value.toLowerCase().trim();
+
             if (!query) {
                 recommendationSection.style.display = "none";
-                moodCards.forEach(c => c.classList.remove('active'));
+
+                moodCards.forEach((card) => {
+                    card.classList.remove("active");
+                });
+
                 return;
             }
 
-            moodCards.forEach(c => c.classList.remove('active'));
-            let allSongs = [];
-            Object.values(musicData).forEach(arr => {
-                allSongs = allSongs.concat(arr);
+            moodCards.forEach((card) => {
+                card.classList.remove("active");
             });
 
-            const filtered = allSongs.filter(song =>
-                song.title.toLowerCase().includes(query) ||
-                song.artist.toLowerCase().includes(query)
-            );
+            let allSongs = [];
 
-            renderSongs(filtered, `Search Results for "${query}"`, 'SEARCH');
+            Object.values(musicData).forEach((songs) => {
+                allSongs = allSongs.concat(songs);
+            });
+
+            const filteredSongs = allSongs.filter((song) => {
+                return (
+                    song.title.toLowerCase().includes(query) ||
+                    song.artist.toLowerCase().includes(query)
+                );
+            });
+
+            renderSongs(
+                filteredSongs,
+                `Search Results for "${query}"`,
+                "SEARCH"
+            );
         });
     </script>
 </body>
-
 </html>
